@@ -1,50 +1,65 @@
-# Welcome to your Expo app 👋
+# 📱 TrackThree
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**TrackThree** is a lightweight, client-focused nutrition tracking app built with React Native. Designed for my cients, it focuses on tracking three essentials: **calories, protein, and water** — nothing more, nothing less.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Tech Stack
 
-   ```bash
-   npm install
-   ```
+### 🧱 Frontend
 
-2. Start the app
+- **React Native (Expo)** – cross-platform mobile app
+- **React Navigation** – screen and navigation management
+- **NativeWind (Tailwind CSS)** – utility-first styling
+- **AsyncStorage** – optional local storage
 
-   ```bash
-   npx expo start
-   ```
+### ☁️ Backend
 
-In the output, you'll find options to open the app in a
+- **AWS API Gateway** – secure API routing
+- **AWS Lambda** – serverless backend logic
+- **AWS DynamoDB** – stores user logs and nutrition entries
+- _(Optional)_ **AWS Cognito** – for future secure client access (or custom login)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🔐 Access Model
 
-## Get a fresh project
+This app is private-use only. Only clients provided with a unique login from the trainer will be able to access and track their data.  
+Initial versions may use a hardcoded credential system while the backend is developed.
 
-When you're ready, run:
+---
+
+## 📦 Features (MVP)
+
+- [ ] Custom login screen (for trainer-provided access)
+- [ ] Add & update daily calories, protein, and water
+- [ ] View daily and weekly stats
+- [ ] Simple, distraction-free UI
+
+---
+
+## 🧠 Why TrackThree?
+
+Unlike most fitness apps packed with bloated features, **TrackThree** is intentionally minimal. It exists for **clients who just want to track the essentials**, stay consistent, and report back to their coach.
+
+---
+
+## 🛠️ Project Status
+
+🚧 Currently in development. MVP goal: lightweight, secure tracker with client-specific access.
+
+---
+
+## 📁 Setup Instructions
 
 ```bash
-npm run reset-project
+# Clone the repo
+git clone https://github.com/YOUR_USERNAME/trackthree.git
+cd trackthree
+
+# Install dependencies
+npm install
+
+# Start the app
+npx expo start
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
