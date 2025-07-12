@@ -1,4 +1,5 @@
 // app/(tabs)/index.tsx
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -23,11 +24,17 @@ const HomeScreen = () => {
 
       {/* Action Buttons */}
       <View style={styles.buttonRow}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>➕ Add Manually</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("/add")}
+        >
+          <Text style={styles.buttonText}>Add Manually</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>📷 Scan QR</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("/scan")}
+        >
+          <Text style={styles.buttonText}>Scan QR</Text>
         </TouchableOpacity>
       </View>
     </View>
