@@ -12,13 +12,13 @@ const HomeScreen = () => {
       {/* Header Totals */}
       <View style={styles.totalsContainer}>
         <Text style={styles.stat}>
-          🔥 Calories: <Text style={styles.value}>1420 kcal</Text>
+          Calories: <Text style={styles.value}>1420 kcal</Text>
         </Text>
         <Text style={styles.stat}>
-          💪 Protein: <Text style={styles.value}>120 g</Text>
+          Protein: <Text style={styles.value}>120 g</Text>
         </Text>
         <Text style={styles.stat}>
-          💧 Water: <Text style={styles.value}>48 oz</Text>
+          Water: <Text style={styles.value}>48 oz</Text>
         </Text>
       </View>
 
