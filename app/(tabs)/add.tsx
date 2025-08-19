@@ -16,10 +16,7 @@ const AddScreen = () => {
   const [water, setWater] = useState("");
 
   const handleSubmit = () => {
-    Alert.alert(
-      "Submitted",
-      `🔥 ${calories} kcal\n💪 ${protein} g\n💧 ${water} oz`
-    );
+    Alert.alert("Submitted", ` ${calories} kcal\n ${protein} g\n ${water} oz`);
     router.back();
   };
 

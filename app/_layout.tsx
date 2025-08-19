@@ -1,7 +1,7 @@
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect } from "react";
-//import GlobalProvider from "../context/GlobalProvider";
+import { TrackerProvider } from "../context/TrackerContext";
 
 SplashScreen.preventAutoHideAsync;
 
@@ -20,17 +20,18 @@ const RootLayout = () => {
 
   useEffect(() => {
     if (error) throw error;
-
     if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded, error]);
 
   if (!fontsLoaded && !error) return null;
 
   return (
-    <Stack>
-      {/*<Stack.Screen name="(auth)" options={{ headerShown: false }} />*/}
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <TrackerProvider>
+      <Stack>
+        {/* <Stack.Screen name="(auth)" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </TrackerProvider>
   );
 };
 
