@@ -1,4 +1,3 @@
-// app/(tabs)/add.tsx
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -9,15 +8,26 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useTracker } from "../../context/TrackerContext";
 
 const AddScreen = () => {
   const [calories, setCalories] = useState("");
   const [protein, setProtein] = useState("");
   const [water, setWater] = useState("");
 
+  const { addCalories, addProtein, addWater } = useTracker();
+
   const handleSubmit = () => {
-    Alert.alert("Submitted", ` ${calories} kcal\n ${protein} g\n ${water} oz`);
-    router.back();
+    const cal = parseInt(calories) || 0;
+    const pro = parseInt(protein) || 0;
+    const wat = parseInt(water) || 0;
+
+    addCalories(cal);
+    addProtein(pro);
+    addWater(wat);
+
+    Alert.alert("Added!", `🔥 ${cal} kcal\n💪 ${pro} g\n💧 ${wat} oz`);
+    router.back(); // ✅ go back to Home
   };
 
   return (
