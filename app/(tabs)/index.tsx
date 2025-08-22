@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-SemiBold",
   },
   value: {
-    color: "#FF3C3C", // BartoBuild red
+    color: "#FF3C3C",
   },
   buttonRow: {
     flexDirection: "row",

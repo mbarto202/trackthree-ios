@@ -26,8 +26,8 @@ const AddScreen = () => {
     addProtein(pro);
     addWater(wat);
 
-    Alert.alert("Added!", `🔥 ${cal} kcal\n💪 ${pro} g\n💧 ${wat} oz`);
-    router.back(); // ✅ go back to Home
+    Alert.alert("Added!", ` ${cal} kcal\n ${pro} g\n ${wat} oz`);
+    router.back(); // go back to Home
   };
 
   return (
