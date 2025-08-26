@@ -1,5 +1,8 @@
+// app/(tabs)/add.tsx
+import { useTracker } from "@/context/TrackerContext";
+import { useFocusEffect } from "@react-navigation/native";
 import { router } from "expo-router";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Alert,
   StyleSheet,
@@ -8,7 +11,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useTracker } from "../../context/TrackerContext";
 
 const AddScreen = () => {
   const [calories, setCalories] = useState("");
@@ -18,17 +20,22 @@ const AddScreen = () => {
   const { addCalories, addProtein, addWater } = useTracker();
 
   const handleSubmit = () => {
-    const cal = parseInt(calories) || 0;
-    const pro = parseInt(protein) || 0;
-    const wat = parseInt(water) || 0;
+    addCalories(Number(calories));
+    addProtein(Number(protein));
+    addWater(Number(water));
 
-    addCalories(cal);
-    addProtein(pro);
-    addWater(wat);
-
-    Alert.alert("Added!", ` ${cal} kcal\n ${pro} g\n ${wat} oz`);
-    router.back(); // go back to Home
+    Alert.alert("Submitted", ` ${calories} kcal\n ${protein} g\n ${water} oz`);
+    router.back();
   };
+
+  // 👇 Reset form when returning to this screen
+  useFocusEffect(
+    useCallback(() => {
+      setCalories("");
+      setProtein("");
+      setWater("");
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
