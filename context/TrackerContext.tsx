@@ -10,6 +10,7 @@ type TrackerContextType = {
   addCalories: (amount: number) => void;
   addProtein: (amount: number) => void;
   addWater: (amount: number) => void;
+  resetTracker: () => void;
 };
 
 const TrackerContext = createContext<TrackerContextType | undefined>(undefined);
@@ -31,6 +32,13 @@ export const TrackerProvider = ({ children }: { children: ReactNode }) => {
   const addProtein = (amount: number) => setProtein((prev) => prev + amount);
   const addWater = (amount: number) => setWater((prev) => prev + amount);
 
+  // For reset button
+  const resetTracker = () => {
+    setCalories(0);
+    setProtein(0);
+    setWater(0);
+  };
+
   return (
     <TrackerContext.Provider
       value={{
@@ -43,6 +51,7 @@ export const TrackerProvider = ({ children }: { children: ReactNode }) => {
         addCalories,
         addProtein,
         addWater,
+        resetTracker,
       }}
     >
       {children}
