@@ -6,7 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTracker } from "../../context/TrackerContext";
 
 const HomeScreen = () => {
-  const { calories, protein, water } = useTracker();
+  const { calories, protein, water, resetTracker } = useTracker();
 
   return (
     <View style={styles.container}>
