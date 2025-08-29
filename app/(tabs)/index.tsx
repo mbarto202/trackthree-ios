@@ -39,6 +39,11 @@ const HomeScreen = () => {
         >
           <Text style={styles.buttonText}>Scan QR</Text>
         </TouchableOpacity>
+        <View style={styles.resetContainer}>
+          <TouchableOpacity style={styles.resetButton} onPress={resetTracker}>
+            <Text style={styles.resetText}>Reset for the Day</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -84,6 +89,22 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: 16,
+    fontFamily: "Poppins-Medium",
+  },
+  resetContainer: {
+    marginTop: 30,
+    width: "100%",
+    alignItems: "center",
+  },
+  resetButton: {
+    backgroundColor: "#444",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+  },
+  resetText: {
+    color: "#fff",
+    fontSize: 14,
     fontFamily: "Poppins-Medium",
   },
 });
