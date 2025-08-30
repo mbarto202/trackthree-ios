@@ -39,11 +39,11 @@ const HomeScreen = () => {
         >
           <Text style={styles.buttonText}>Scan QR</Text>
         </TouchableOpacity>
-        <View style={styles.resetContainer}>
-          <TouchableOpacity style={styles.resetButton} onPress={resetTracker}>
-            <Text style={styles.resetText}>Reset for the Day</Text>
-          </TouchableOpacity>
-        </View>
+      </View>
+      <View style={styles.resetContainer}>
+        <TouchableOpacity style={styles.resetButton} onPress={resetTracker}>
+          <Text style={styles.resetText}>Reset for the Day</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
