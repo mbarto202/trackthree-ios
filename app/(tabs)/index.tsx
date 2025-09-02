@@ -12,34 +12,37 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      {/* Header Totals */}
-      <View style={styles.totalsContainer}>
-        <Text style={styles.stat}>
-          Calories: <Text style={styles.value}>{calories} kcal</Text>
-        </Text>
-        <Text style={styles.stat}>
-          Protein: <Text style={styles.value}>{protein} g</Text>
-        </Text>
-        <Text style={styles.stat}>
-          Water: <Text style={styles.value}>{water} oz</Text>
-        </Text>
+      {/* Wrap all content except reset button */}
+      <View style={styles.contentWrapper}>
+        <View style={styles.totalsContainer}>
+          <Text style={styles.stat}>
+            Calories: <Text style={styles.value}>{calories} kcal</Text>
+          </Text>
+          <Text style={styles.stat}>
+            Protein: <Text style={styles.value}>{protein} g</Text>
+          </Text>
+          <Text style={styles.stat}>
+            Water: <Text style={styles.value}>{water} oz</Text>
+          </Text>
+        </View>
+
+        <View style={styles.buttonRow}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.push("/add")}
+          >
+            <Text style={styles.buttonText}>Add Manually</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.push("/scan")}
+          >
+            <Text style={styles.buttonText}>Scan QR</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      {/* Action Buttons */}
-      <View style={styles.buttonRow}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.push("/add")}
-        >
-          <Text style={styles.buttonText}>Add Manually</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.push("/scan")}
-        >
-          <Text style={styles.buttonText}>Scan QR</Text>
-        </TouchableOpacity>
-      </View>
+      {/* Reset Button pinned to bottom */}
       <View style={styles.resetContainer}>
         <TouchableOpacity style={styles.resetButton} onPress={resetTracker}>
           <Text style={styles.resetText}>Reset for the Day</Text>
@@ -57,8 +60,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     paddingHorizontal: 24,
     paddingTop: 80,
-    alignItems: "center",
+    paddingBottom: 40,
+    justifyContent: "space-around",
   },
+
+  contentWrapper: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+
   totalsContainer: {
     marginBottom: 40,
     width: "100%",
