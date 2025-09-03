@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingBottom: 40,
     justifyContent: "space-around",
+    maxWidth: 500,
   },
 
   contentWrapper: {
@@ -84,6 +85,7 @@ const styles = StyleSheet.create({
     color: "#FF3C3C",
   },
   buttonRow: {
+    paddingTop: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
@@ -106,7 +108,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: "100%",
     alignItems: "center",
+    borderTopWidth: 1,
+    borderTopColor: "#222",
+    paddingTop: 20,
   },
+
   resetButton: {
     backgroundColor: "#444",
     paddingVertical: 12,
