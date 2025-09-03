@@ -14,6 +14,12 @@ const HomeScreen = () => {
 
       {/* Wrap all content except reset button */}
       <View style={styles.contentWrapper}>
+        <View style={styles.header}>
+          <Text style={styles.logo}>TrackThree</Text>
+          <Text style={styles.tagline}>
+            Discipline, Consistency, Initiative
+          </Text>
+        </View>
         <View style={styles.totalsContainer}>
           <Text style={styles.stat}>
             Calories: <Text style={styles.value}>{calories} kcal</Text>
@@ -25,7 +31,9 @@ const HomeScreen = () => {
             Water: <Text style={styles.value}>{water} oz</Text>
           </Text>
         </View>
+      </View>
 
+      <View style={styles.footerWrapper}>
         <View style={styles.buttonRow}>
           <TouchableOpacity
             style={styles.button}
@@ -40,13 +48,12 @@ const HomeScreen = () => {
             <Text style={styles.buttonText}>Scan QR</Text>
           </TouchableOpacity>
         </View>
-      </View>
 
-      {/* Reset Button pinned to bottom */}
-      <View style={styles.resetContainer}>
-        <TouchableOpacity style={styles.resetButton} onPress={resetTracker}>
-          <Text style={styles.resetText}>Reset for the Day</Text>
-        </TouchableOpacity>
+        <View style={styles.resetContainer}>
+          <TouchableOpacity style={styles.resetButton} onPress={resetTracker}>
+            <Text style={styles.resetText}>Reset for the Day</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -69,6 +76,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    marginBottom: 80,
+    bottom: 50,
   },
 
   totalsContainer: {
@@ -123,5 +132,26 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 14,
     fontFamily: "Poppins-Medium",
+  },
+  header: {
+    alignItems: "center",
+    marginBottom: 30,
+  },
+
+  logo: {
+    fontSize: 28,
+    color: "#FF3C3C",
+    fontFamily: "Poppins-Bold",
+  },
+
+  tagline: {
+    fontSize: 14,
+    color: "#aaa",
+    fontFamily: "Poppins-Regular",
+    marginTop: 4,
+  },
+
+  footerWrapper: {
+    width: "100%",
   },
 });
