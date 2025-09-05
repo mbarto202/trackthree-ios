@@ -1,8 +1,8 @@
 // app/(tabs)/add.tsx
 import { useTracker } from "@/context/TrackerContext";
 import { useFocusEffect } from "@react-navigation/native";
-import { router } from "expo-router";
-import React, { useCallback, useState } from "react";
+import { router, useNavigation } from "expo-router";
+import React, { useCallback, useLayoutEffect, useState } from "react";
 import {
   Alert,
   StyleSheet,
@@ -16,8 +16,8 @@ const AddScreen = () => {
   const [calories, setCalories] = useState("");
   const [protein, setProtein] = useState("");
   const [water, setWater] = useState("");
-
   const { addCalories, addProtein, addWater } = useTracker();
+  const navigation = useNavigation();
 
   const handleSubmit = () => {
     addCalories(Number(calories));
@@ -31,6 +31,12 @@ const AddScreen = () => {
   const handleCancel = () => {
     router.back();
   };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      tabBarStyle: { display: "none" },
+    });
+  }, [navigation]);
 
   useFocusEffect(
     useCallback(() => {
@@ -75,7 +81,7 @@ const AddScreen = () => {
       </View>
 
       {/* Bottom Buttons */}
-      <View style={styles.buttonContainer}>
+      <View style={styles.footer}>
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
@@ -98,6 +104,7 @@ const styles = StyleSheet.create({
   },
   form: {
     flexGrow: 1,
+    top: 40,
   },
   label: {
     color: "#fff",
@@ -114,20 +121,22 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontFamily: "Poppins-Regular",
   },
-  buttonContainer: {
-    paddingTop: 20,
+  footer: {
+    paddingBottom: 30,
+    paddingTop: 10,
   },
   submitButton: {
     backgroundColor: "#FF3C3C",
     paddingVertical: 16,
     borderRadius: 12,
-    marginBottom: 16,
+    marginBottom: 12,
   },
   cancelButton: {
     backgroundColor: "#444",
     paddingVertical: 16,
     borderRadius: 12,
   },
+
   buttonText: {
     color: "#fff",
     textAlign: "center",
