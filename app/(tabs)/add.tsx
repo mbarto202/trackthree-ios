@@ -28,7 +28,10 @@ const AddScreen = () => {
     router.back();
   };
 
-  // 👇 Reset form when returning to this screen
+  const handleCancel = () => {
+    router.back();
+  };
+
   useFocusEffect(
     useCallback(() => {
       setCalories("");
@@ -39,39 +42,47 @@ const AddScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Calories</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g. 500"
-        placeholderTextColor="#999"
-        keyboardType="numeric"
-        value={calories}
-        onChangeText={setCalories}
-      />
+      <View style={styles.form}>
+        <Text style={styles.label}>Calories</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="e.g. 500"
+          placeholderTextColor="#999"
+          keyboardType="numeric"
+          value={calories}
+          onChangeText={setCalories}
+        />
 
-      <Text style={styles.label}>Protein (g)</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g. 30"
-        placeholderTextColor="#999"
-        keyboardType="numeric"
-        value={protein}
-        onChangeText={setProtein}
-      />
+        <Text style={styles.label}>Protein (g)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="e.g. 30"
+          placeholderTextColor="#999"
+          keyboardType="numeric"
+          value={protein}
+          onChangeText={setProtein}
+        />
 
-      <Text style={styles.label}>Water (oz)</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g. 16"
-        placeholderTextColor="#999"
-        keyboardType="numeric"
-        value={water}
-        onChangeText={setWater}
-      />
+        <Text style={styles.label}>Water (oz)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="e.g. 16"
+          placeholderTextColor="#999"
+          keyboardType="numeric"
+          value={water}
+          onChangeText={setWater}
+        />
+      </View>
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+      {/* Bottom Buttons */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.cancelButton} onPress={handleCancel}>
+          <Text style={styles.buttonText}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -83,6 +94,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#000",
     padding: 24,
+    justifyContent: "space-between",
+  },
+  form: {
+    flexGrow: 1,
   },
   label: {
     color: "#fff",
@@ -99,11 +114,19 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontFamily: "Poppins-Regular",
   },
-  button: {
+  buttonContainer: {
+    paddingTop: 20,
+  },
+  submitButton: {
     backgroundColor: "#FF3C3C",
     paddingVertical: 16,
     borderRadius: 12,
-    marginTop: 40,
+    marginBottom: 16,
+  },
+  cancelButton: {
+    backgroundColor: "#444",
+    paddingVertical: 16,
+    borderRadius: 12,
   },
   buttonText: {
     color: "#fff",
