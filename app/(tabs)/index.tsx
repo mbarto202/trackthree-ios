@@ -1,12 +1,20 @@
 // app/(tabs)/index.tsx
+import { useNavigation } from "@react-navigation/native";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTracker } from "../../context/TrackerContext";
 
 const HomeScreen = () => {
   const { calories, protein, water, resetTracker } = useTracker();
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      tabBarStyle: { display: "none" },
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
