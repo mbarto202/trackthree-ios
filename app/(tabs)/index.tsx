@@ -161,5 +161,6 @@ const styles = StyleSheet.create({
 
   footerWrapper: {
     width: "100%",
+    top: 40,
   },
 });
