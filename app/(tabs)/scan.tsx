@@ -1,13 +1,19 @@
-// app/(tabs)/scan.tsx
 import { useNavigation } from "@react-navigation/native";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import {
+  BarcodeScanningResult,
+  CameraView,
+  useCameraPermissions,
+} from "expo-camera";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Alert, Button, StyleSheet, Text, View } from "react-native";
 
 const ScanScreen = () => {
   const navigation = useNavigation();
-  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+  const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
+  const cameraRef = useRef<CameraView>(null);
+
+  const hasPermission = permission?.granted;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -16,16 +22,20 @@ const ScanScreen = () => {
   }, [navigation]);
 
   useEffect(() => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === "granted");
-    })();
-  }, []);
+    if (!permission) {
+      requestPermission();
+    }
+  }, [permission]);
 
-  const handleBarCodeScanned = ({ type, data }: any) => {
-    setScanned(true);
-    Alert.alert("QR Code Scanned", `Type: ${type}\nData: ${data}`);
-    navigation.goBack();
+  const handleBarCodeScanned = (result: BarcodeScanningResult) => {
+    if (!scanned) {
+      setScanned(true);
+      Alert.alert(
+        "QR Code Scanned",
+        `Type: ${result.type}\nData: ${result.data}`
+      );
+      navigation.goBack();
+    }
   };
 
   if (hasPermission === null) {
@@ -47,9 +57,11 @@ const ScanScreen = () => {
 
   return (
     <View style={styles.container}>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+      <CameraView
+        ref={cameraRef}
         style={StyleSheet.absoluteFillObject}
+        onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+        barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
       />
       <View style={styles.cancelButton}>
         <Button
