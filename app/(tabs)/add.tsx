@@ -5,10 +5,15 @@ import { router, useNavigation } from "expo-router";
 import React, { useCallback, useLayoutEffect, useState } from "react";
 import {
   Alert,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -47,49 +52,66 @@ const AddScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.form}>
-        <Text style={styles.label}>Calories</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="e.g. 500"
-          placeholderTextColor="#999"
-          keyboardType="numeric"
-          value={calories}
-          onChangeText={setCalories}
-        />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={100} // adjust if keyboard still overlaps
+      >
+        <ScrollView
+          contentContainerStyle={styles.container}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.form}>
+            <Text style={styles.label}>Calories</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="e.g. 500"
+              placeholderTextColor="#999"
+              keyboardType="numeric"
+              value={calories}
+              onChangeText={setCalories}
+            />
 
-        <Text style={styles.label}>Protein (g)</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="e.g. 30"
-          placeholderTextColor="#999"
-          keyboardType="numeric"
-          value={protein}
-          onChangeText={setProtein}
-        />
+            <Text style={styles.label}>Protein (g)</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="e.g. 30"
+              placeholderTextColor="#999"
+              keyboardType="numeric"
+              value={protein}
+              onChangeText={setProtein}
+            />
 
-        <Text style={styles.label}>Water (oz)</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="e.g. 16"
-          placeholderTextColor="#999"
-          keyboardType="numeric"
-          value={water}
-          onChangeText={setWater}
-        />
-      </View>
+            <Text style={styles.label}>Water (oz)</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="e.g. 16"
+              placeholderTextColor="#999"
+              keyboardType="numeric"
+              value={water}
+              onChangeText={setWater}
+            />
+          </View>
 
-      {/* Bottom Buttons */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.cancelButton} onPress={handleCancel}>
-          <Text style={styles.buttonText}>Cancel</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          {/* Bottom Buttons */}
+          <View style={styles.footer}>
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={handleSubmit}
+            >
+              <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={handleCancel}
+            >
+              <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
