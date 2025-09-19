@@ -1,16 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
-import {
-  BarcodeScanningResult,
-  CameraView,
-  useCameraPermissions,
-} from "expo-camera";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { CameraView, useCameraPermissions } from "expo-camera";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 const ScanScreen = () => {
   const navigation = useNavigation();
   const [permission, requestPermission] = useCameraPermissions();
-  const [scanned, setScanned] = useState(false);
   const cameraRef = useRef<CameraView>(null);
 
   const hasPermission = permission?.granted;
@@ -26,17 +21,6 @@ const ScanScreen = () => {
       requestPermission();
     }
   }, [permission]);
-
-  const handleBarCodeScanned = (result: BarcodeScanningResult) => {
-    if (!scanned) {
-      setScanned(true);
-      Alert.alert(
-        "QR Code Scanned",
-        `Type: ${result.type}\nData: ${result.data}`
-      );
-      navigation.goBack();
-    }
-  };
 
   if (hasPermission === null) {
     return (
@@ -60,9 +44,13 @@ const ScanScreen = () => {
       <CameraView
         ref={cameraRef}
         style={StyleSheet.absoluteFillObject}
-        onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
-        barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
+        // QR scanning logic is commented out for now
+        // onBarcodeScanned={handleBarCodeScanned}
+        // barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
       />
+      <View style={styles.overlay}>
+        <Text style={styles.overlayText}>QR Scanner Coming Soon!</Text>
+      </View>
       <View style={styles.cancelButton}>
         <Button
           title="Cancel"
@@ -87,6 +75,21 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
     fontSize: 16,
+  },
+  overlay: {
+    position: "absolute",
+    top: 60,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+  },
+  overlayText: {
+    color: "#fff",
+    backgroundColor: "rgba(0,0,0,0.6)",
+    padding: 10,
+    borderRadius: 8,
+    fontSize: 18,
+    fontWeight: "bold",
   },
   cancelButton: {
     marginBottom: 50,
