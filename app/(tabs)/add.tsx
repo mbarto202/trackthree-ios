@@ -56,7 +56,7 @@ const AddScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.form}>
-          <Text style={styles.label}>Calories</Text>
+          <Text style={styles.label}>Calories (kcal)</Text>
           <TextInput
             style={styles.input}
             placeholder="e.g. 500"
