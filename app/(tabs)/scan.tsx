@@ -1,12 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
-import { CameraView, useCameraPermissions } from "expo-camera";
-import React, { useEffect, useLayoutEffect, useRef } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import {
+  BarcodeScanningResult,
+  CameraView,
+  useCameraPermissions,
+} from "expo-camera";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Alert, Button, StyleSheet, Text, View } from "react-native";
 
 const ScanScreen = () => {
   const navigation = useNavigation();
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<CameraView>(null);
+  const [scanned, setScanned] = useState(false);
 
   const hasPermission = permission?.granted;
 
@@ -21,6 +26,26 @@ const ScanScreen = () => {
       requestPermission();
     }
   }, [permission]);
+
+  const handleBarCodeScanned = (result: BarcodeScanningResult) => {
+    if (!scanned) {
+      setScanned(true);
+      Alert.alert(
+        "QR Code Scanned",
+        `Type: ${result.type}\nData: ${result.data}`,
+        [
+          {
+            text: "Scan Again",
+            onPress: () => setScanned(false),
+          },
+          {
+            text: "Done",
+            onPress: () => navigation.goBack(),
+          },
+        ]
+      );
+    }
+  };
 
   if (hasPermission === null) {
     return (
@@ -44,9 +69,8 @@ const ScanScreen = () => {
       <CameraView
         ref={cameraRef}
         style={StyleSheet.absoluteFillObject}
-        // QR scanning logic is commented out for now
-        // onBarcodeScanned={handleBarCodeScanned}
-        // barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
+        onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+        barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
       />
       <View style={styles.overlay}>
         <Text style={styles.overlayText}>QR Scanner Coming Soon!</Text>
