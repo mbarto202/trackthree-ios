@@ -47,12 +47,6 @@ const HomeScreen = () => {
           >
             <Text style={styles.buttonText}>Add Manually</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => router.push("/scan")}
-          >
-            <Text style={styles.buttonText}>Scan QR</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.resetContainer}>
