@@ -24,7 +24,7 @@ const HomeScreen = () => {
       <View style={styles.contentWrapper}>
         <View style={styles.header}>
           <Text style={styles.logo}>TrackThree</Text>
-          <Text style={styles.tagline}>Discipline, Consistency, Ambition</Text>
+          <Text style={styles.tagline}>Ambition, Consistency, Discipline</Text>
         </View>
         <View style={styles.totalsContainer}>
           <Text style={styles.stat}>
