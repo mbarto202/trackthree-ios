@@ -101,11 +101,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#FF3C3C",
-    paddingVertical: 14,
-    paddingHorizontal: 20,
+    paddingVertical: 16,
     borderRadius: 12,
     flex: 1,
-    marginHorizontal: 6,
   },
   buttonText: {
     color: "#fff",
@@ -114,7 +112,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Medium",
   },
   resetContainer: {
-    marginTop: 30,
+    marginTop: 20,
     width: "100%",
     alignItems: "center",
     borderTopWidth: 1,
