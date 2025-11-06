@@ -1,60 +1,50 @@
-# 📱 TrackThree
+# TrackThree
 
-**TrackThree** is a lightweight, client-focused nutrition tracking app built with React Native. Designed for my cients, it focuses on tracking three essentials: **calories, protein, and water** — nothing more, nothing less.
-
----
-
-## 🚀 Tech Stack
-
-### 🧱 Frontend
-
-- **React Native (Expo)** – cross-platform mobile app
-- **React Navigation** – screen and navigation management
-- **NativeWind (Tailwind CSS)** – utility-first styling
-- **AsyncStorage** – optional local storage
-
-### ☁️ Backend
-
-- **AWS API Gateway** – secure API routing
-- **AWS Lambda** – serverless backend logic
-- **AWS DynamoDB** – stores user logs and nutrition entries
-- _(Optional)_ **AWS Cognito** – for future secure client access (or custom login)
+**TrackThree** is a lightweight, minimalist nutrition tracking app built with React Native. It focuses on tracking three essentials: calories, protein, and water — nothing more, nothing less. Ideal for users who want to stay consistent without the clutter of feature-heavy fitness apps.
 
 ---
 
-## 🔐 Access Model
+## Features
 
-This app is private-use only. Only clients provided with a unique login from the trainer will be able to access and track their data.  
-Initial versions may use a hardcoded credential system while the backend is developed.
-
----
-
-## 📦 Features (MVP)
-
-- [ ] Custom login screen (for trainer-provided access)
-- [ ] Add & update daily calories, protein, and water
-- [ ] View daily and weekly stats
-- [ ] Simple, distraction-free UI
+- Cross-platform mobile app with React Native and Expo
+- Clean, distraction-free UI for logging daily nutrition
+- Persistent local data using AsyncStorage
+- Scalable architecture for future backend integration
 
 ---
 
-## 🧠 Why TrackThree?
+## Tech Stack
 
-Unlike most fitness apps packed with bloated features, **TrackThree** is intentionally minimal. It exists for **clients who just want to track the essentials**, stay consistent, and report back to their coach.
+### Frontend
+
+- React Native (Expo)
+- React Navigation
+- NativeWind (Tailwind CSS for React Native)
+- AsyncStorage
+
+### Backend (Local)
+
+- Spring Boot
+- Java 21
+- PostgreSQL
+- Spring Data JPA with Hibernate
+
+_Note: Backend runs locally and connects to a PostgreSQL database. No cloud infrastructure is currently used._
 
 ---
 
-## 🛠️ Project Status
+## Project Status
 
-🚧 Currently in development. MVP goal: lightweight, secure tracker with client-specific access.
+Currently in development.  
+MVP goal: provide a lightweight, reliable tracker with daily logging functionality and optional backend integration.
 
 ---
 
-## 📁 Setup Instructions
+## Setup Instructions
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/trackthree.git
+git clone https://github.com/mbarto202/trackthree-ios
 cd trackthree
 
 # Install dependencies
@@ -63,3 +53,5 @@ npm install
 # Start the app
 npx expo start
 ```
+
+---
