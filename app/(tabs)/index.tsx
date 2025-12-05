@@ -42,10 +42,17 @@ const HomeScreen = () => {
       <View style={styles.footerWrapper}>
         <View style={styles.buttonRow}>
           <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, { marginRight: 8 }]}
             onPress={() => router.push("/add")}
           >
-            <Text style={styles.buttonText}>Add Manually</Text>
+            <Text style={styles.buttonText}>Add</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.button, { marginLeft: 8 }]}
+            onPress={() => router.push("/history")}
+          >
+            <Text style={styles.buttonText}>History</Text>
           </TouchableOpacity>
         </View>
 
