@@ -58,7 +58,7 @@ const HomeScreen = () => {
 
         <View style={styles.resetContainer}>
           <TouchableOpacity style={styles.resetButton} onPress={resetTracker}>
-            <Text style={styles.resetText}>Reset for the Day</Text>
+            <Text style={styles.resetText}>Reset</Text>
           </TouchableOpacity>
         </View>
       </View>
