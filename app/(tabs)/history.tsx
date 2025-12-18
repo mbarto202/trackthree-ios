@@ -1,6 +1,12 @@
 import { useNavigation } from "expo-router";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 type Entry = {
   id: number;
@@ -36,6 +42,13 @@ export default function HistoryScreen() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.backButtonText}>← Back</Text>
+      </TouchableOpacity>
+
       <Text style={styles.title}>History</Text>
 
       <FlatList
@@ -79,5 +92,18 @@ const styles = StyleSheet.create({
   text: {
     color: "#ccc",
     fontSize: 14,
+  },
+  backButton: {
+    marginBottom: 12,
+    backgroundColor: "#333",
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    alignSelf: "flex-start",
+  },
+  backButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontFamily: "Poppins-Medium",
   },
 });
