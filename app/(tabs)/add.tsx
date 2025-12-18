@@ -22,13 +22,36 @@ const AddScreen = () => {
   const { addCalories, addProtein, addWater } = useTracker();
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
-    addCalories(Number(calories));
-    addProtein(Number(protein));
-    addWater(Number(water));
+  const handleSubmit = async () => {
+    const entry = {
+      calories: Number(calories),
+      protein: Number(protein),
+      water: Number(water),
+      date: new Date().toISOString().split("T")[0],
+    };
 
-    Alert.alert("Submitted", ` ${calories} kcal\n ${protein} g\n ${water} oz`);
-    router.back();
+    try {
+      const res = await fetch("http://localhost:8080/api/tracker/log", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(entry),
+      });
+
+      if (res.ok) {
+        addCalories(entry.calories);
+        addProtein(entry.protein);
+        addWater(entry.water);
+        Alert.alert("Success", "Entry saved and updated.");
+        router.back();
+      } else {
+        Alert.alert("Error", "Failed to save entry.");
+      }
+    } catch (err) {
+      Alert.alert("Network Error", "Could not reach server.");
+      console.error(err);
+    }
   };
 
   const handleCancel = () => {
