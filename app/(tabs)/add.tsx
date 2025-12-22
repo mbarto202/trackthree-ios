@@ -43,7 +43,6 @@ const AddScreen = () => {
         addCalories(entry.calories);
         addProtein(entry.protein);
         addWater(entry.water);
-        Alert.alert("Success", "Entry saved and updated.");
         router.back();
       } else {
         Alert.alert("Error", "Failed to save entry.");
