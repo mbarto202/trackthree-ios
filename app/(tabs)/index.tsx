@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useLayoutEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTracker } from "../../context/TrackerContext";
 
 const HomeScreen = () => {
@@ -61,6 +61,51 @@ const HomeScreen = () => {
             <Text style={styles.resetText}>Reset</Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          style={styles.uploadButton}
+          onPress={() => {
+            Alert.alert("Upload Entry", "Upload today's data to history?", [
+              {
+                text: "Cancel",
+                style: "cancel",
+              },
+              {
+                text: "Upload",
+                onPress: async () => {
+                  try {
+                    const today = new Date().toISOString().split("T")[0];
+                    const response = await fetch(
+                      "http://localhost:8080/api/tracker/log",
+                      {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          date: today,
+                          calories,
+                          protein,
+                          water,
+                        }),
+                      }
+                    );
+
+                    if (response.ok) {
+                      Alert.alert("✅ Success", "Entry uploaded!");
+                    } else {
+                      Alert.alert("❌ Error", "Failed to upload entry.");
+                    }
+                  } catch (err) {
+                    console.error(err);
+                    Alert.alert("❌ Error", "Failed to connect to backend.");
+                  }
+                },
+              },
+            ]);
+          }}
+        >
+          <Text style={styles.uploadIcon}>⬆️</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -159,5 +204,18 @@ const styles = StyleSheet.create({
   footerWrapper: {
     width: "100%",
     top: 40,
+  },
+  uploadButton: {
+    marginTop: 16,
+    backgroundColor: "#FF3C3C",
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  uploadIcon: {
+    fontSize: 24,
+    color: "#fff",
   },
 });
