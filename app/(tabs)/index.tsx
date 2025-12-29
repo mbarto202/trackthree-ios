@@ -201,16 +201,15 @@ const styles = StyleSheet.create({
     top: 40,
   },
   uploadButton: {
-    marginTop: 16,
+    position: "absolute",
+    top: 600,
+    right: 24,
+    width: 36,
+    height: 36,
+    borderRadius: 22,
     backgroundColor: "#FF3C3C",
-    borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  uploadIcon: {
-    fontSize: 24,
-    color: "#fff",
+    zIndex: 10,
   },
 });
