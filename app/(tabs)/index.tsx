@@ -29,7 +29,13 @@ const HomeScreen = () => {
               text: "Upload",
               onPress: async () => {
                 try {
-                  const today = new Date().toISOString().split("T")[0];
+                  const now = new Date(); // uploading dupe entries with diff dates
+                  const today = `${now.getFullYear()}-${String(
+                    now.getMonth() + 1
+                  ).padStart(2, "0")}-${String(now.getDate()).padStart(
+                    2,
+                    "0"
+                  )}`;
                   const response = await fetch(
                     "http://localhost:8080/api/tracker/log",
                     {
