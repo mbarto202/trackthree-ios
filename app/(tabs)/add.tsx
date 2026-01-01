@@ -21,13 +21,18 @@ const AddScreen = () => {
   const [water, setWater] = useState("");
   const { addCalories, addProtein, addWater } = useTracker();
   const navigation = useNavigation();
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}-${String(now.getDate()).padStart(2, "0")}`;
 
   const handleSubmit = async () => {
     const entry = {
       calories: Number(calories),
       protein: Number(protein),
       water: Number(water),
-      date: new Date().toISOString().split("T")[0],
+      date: today,
     };
 
     try {

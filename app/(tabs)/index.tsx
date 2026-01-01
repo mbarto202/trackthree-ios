@@ -29,7 +29,7 @@ const HomeScreen = () => {
               text: "Upload",
               onPress: async () => {
                 try {
-                  const now = new Date(); // uploading dupe entries with diff dates
+                  const now = new Date();
                   const today = `${now.getFullYear()}-${String(
                     now.getMonth() + 1
                   ).padStart(2, "0")}-${String(now.getDate()).padStart(
