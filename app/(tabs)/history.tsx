@@ -56,7 +56,13 @@ export default function HistoryScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text style={styles.date}>{item.date}</Text>
+            <Text style={styles.date}>
+              {new Date(item.date + "T00:00:00").toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </Text>
             <Text style={styles.text}>Calories: {item.calories}</Text>
             <Text style={styles.text}>Protein: {item.protein}</Text>
             <Text style={styles.text}>Water: {item.water} oz</Text>
