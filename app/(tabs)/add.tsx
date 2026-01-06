@@ -4,7 +4,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { router, useNavigation } from "expo-router";
 import React, { useCallback, useLayoutEffect, useState } from "react";
 import {
-  Alert,
   Keyboard,
   ScrollView,
   StyleSheet,
@@ -27,35 +26,11 @@ const AddScreen = () => {
     "0"
   )}-${String(now.getDate()).padStart(2, "0")}`;
 
-  const handleSubmit = async () => {
-    const entry = {
-      calories: Number(calories),
-      protein: Number(protein),
-      water: Number(water),
-      date: today,
-    };
-
-    try {
-      const res = await fetch("http://localhost:8080/api/tracker/log", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(entry),
-      });
-
-      if (res.ok) {
-        addCalories(entry.calories);
-        addProtein(entry.protein);
-        addWater(entry.water);
-        router.back();
-      } else {
-        Alert.alert("Error", "Failed to save entry.");
-      }
-    } catch (err) {
-      Alert.alert("Network Error", "Could not reach server.");
-      console.error(err);
-    }
+  const handleSubmit = () => {
+    addCalories(Number(calories));
+    addProtein(Number(protein));
+    addWater(Number(water));
+    router.back();
   };
 
   const handleCancel = () => {
