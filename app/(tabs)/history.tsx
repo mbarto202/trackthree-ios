@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
 import { useEffect, useLayoutEffect, useState } from "react";
 import {
@@ -42,14 +43,21 @@ export default function HistoryScreen() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.backButtonText}>← Back</Text>
-      </TouchableOpacity>
+      <View style={styles.headerRow}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+          activeOpacity={0.7}
+        >
+          <Ionicons name="chevron-back" size={22} color="#fff" />
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
 
-      <Text style={styles.title}>History</Text>
+        <Text style={styles.title}>History</Text>
+
+        {/* spacer to keep title centered */}
+        <View style={styles.headerSpacer} />
+      </View>
 
       <FlatList
         data={entries}
@@ -79,11 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     padding: 20,
   },
-  title: {
-    color: "#FF3C3C",
-    fontSize: 24,
-    marginBottom: 16,
-  },
   card: {
     backgroundColor: "#111",
     padding: 16,
@@ -99,17 +102,33 @@ const styles = StyleSheet.create({
     color: "#ccc",
     fontSize: 14,
   },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    top: 50,
+    marginBottom: 80,
+  },
+  title: {
+    color: "#FF3C3C",
+    fontSize: 22,
+    fontFamily: "Poppins-Bold",
+  },
   backButton: {
-    marginBottom: 12,
-    backgroundColor: "#333",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    alignSelf: "flex-start",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    backgroundColor: "#222",
   },
   backButtonText: {
     color: "#fff",
     fontSize: 16,
+    marginLeft: 4,
     fontFamily: "Poppins-Medium",
+  },
+  headerSpacer: {
+    width: 90,
   },
 });
