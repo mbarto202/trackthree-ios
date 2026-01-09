@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: 16,
-    fontFamily: "Poppins-Medium",
+    fontFamily: "Poppins-SemiBold",
   },
   resetContainer: {
     marginTop: 20,
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   resetText: {
     color: "#fff",
     fontSize: 14,
-    fontFamily: "Poppins-Medium",
+    fontFamily: "Poppins-SemiBold",
   },
   header: {
     alignItems: "center",
