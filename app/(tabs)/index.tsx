@@ -9,6 +9,8 @@ import { useTracker } from "../../context/TrackerContext";
 
 const HomeScreen = () => {
   const { calories, protein, water, resetTracker } = useTracker();
+  const clientCode = "TEST123";
+
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -42,6 +44,7 @@ const HomeScreen = () => {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
+                        clientCode,
                         date: today,
                         calories,
                         protein,
