@@ -1,15 +1,15 @@
 // app/(tabs)/index.tsx
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTracker } from "../../context/TrackerContext";
 
 const HomeScreen = () => {
   const { calories, protein, water, resetTracker } = useTracker();
-  const clientCode = "TEST123";
 
   const navigation = useNavigation();
 
@@ -18,6 +18,19 @@ const HomeScreen = () => {
       tabBarStyle: { display: "none" },
     });
   }, [navigation]);
+
+  const [clientCode, setClientCode] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const stored = await AsyncStorage.getItem("clientCode");
+      if (!stored) {
+        router.replace("/code");
+      } else {
+        setClientCode(stored);
+      }
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
