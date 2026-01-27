@@ -38,6 +38,11 @@ const HomeScreen = () => {
       <TouchableOpacity
         style={styles.uploadButton}
         onPress={() => {
+          if (!clientCode) {
+            Alert.alert("Missing Code", "Please enter your client code first.");
+            return;
+          }
+
           Alert.alert("Upload Entry", "Upload today's data to history?", [
             { text: "Cancel", style: "cancel" },
             {
