@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -13,10 +14,28 @@ export default function CodeScreen() {
   const [code, setCode] = useState("");
 
   const handleSave = async () => {
-    if (!code.trim()) return;
+    const formatted = code.trim().toUpperCase();
+    if (!formatted) return;
 
-    await AsyncStorage.setItem("clientCode", code.trim().toUpperCase());
-    router.replace("/"); // go to Home
+    try {
+      const res = await fetch(
+        `http://localhost:8080/api/tracker/validate?clientCode=${formatted}`
+      );
+
+      if (!res.ok) {
+        Alert.alert(
+          "Invalid Code",
+          "Please check your client code and try again."
+        );
+        return;
+      }
+
+      // Only save AFTER validation
+      await AsyncStorage.setItem("clientCode", formatted);
+      router.replace("/"); // go to Home
+    } catch (err) {
+      Alert.alert("Error", "Could not validate code. Try again.");
+    }
   };
 
   return (
