@@ -44,10 +44,11 @@ export default function CodeScreen() {
 
       <TextInput
         style={styles.input}
-        placeholder="e.g. TT-7K3P9D"
+        placeholder="e.g. TT-H1Y4"
         placeholderTextColor="#777"
         value={code}
         onChangeText={setCode}
+        autoCorrect={false}
         autoCapitalize="characters"
       />
 
