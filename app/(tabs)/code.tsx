@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router } from "expo-router";
-import { useState } from "react";
+import { router, useNavigation } from "expo-router";
+import { useLayoutEffect, useState } from "react";
 import {
   Alert,
   StyleSheet,
@@ -12,6 +12,11 @@ import {
 
 export default function CodeScreen() {
   const [code, setCode] = useState("");
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ tabBarStyle: { display: "none" } });
+  }, [navigation]);
 
   const handleSave = async () => {
     const formatted = code.trim().toUpperCase();
@@ -19,13 +24,13 @@ export default function CodeScreen() {
 
     try {
       const res = await fetch(
-        `http://localhost:8080/api/tracker/validate?clientCode=${formatted}`
+        `http://localhost:8080/api/tracker/validate?clientCode=${formatted}`,
       );
 
       if (!res.ok) {
         Alert.alert(
           "Invalid Code",
-          "Please check your client code and try again."
+          "Please check your client code and try again.",
         );
         return;
       }
