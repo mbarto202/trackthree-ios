@@ -60,6 +60,10 @@ export default function CodeScreen() {
       <TouchableOpacity style={styles.button} onPress={handleSave}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => router.replace("/")}>
+        <Text style={styles.skipText}>Proceed without client code</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -97,5 +101,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontFamily: "Poppins-SemiBold",
+  },
+  skipText: {
+    color: "#FF3C3C",
+    textAlign: "center",
+    marginTop: 20,
+    fontSize: 14,
+    fontFamily: "Poppins-Regular",
   },
 });
