@@ -39,7 +39,10 @@ const HomeScreen = () => {
         style={styles.uploadButton}
         onPress={() => {
           if (!clientCode) {
-            Alert.alert("Missing Code", "Please enter your client code first.");
+            Alert.alert(
+              "Client Code Required",
+              "Upload is only available for registered clients.",
+            );
             return;
           }
 
@@ -51,10 +54,10 @@ const HomeScreen = () => {
                 try {
                   const now = new Date();
                   const today = `${now.getFullYear()}-${String(
-                    now.getMonth() + 1
+                    now.getMonth() + 1,
                   ).padStart(2, "0")}-${String(now.getDate()).padStart(
                     2,
-                    "0"
+                    "0",
                   )}`;
                   const response = await fetch(
                     "http://localhost:8080/api/tracker/log",
@@ -68,7 +71,7 @@ const HomeScreen = () => {
                         protein,
                         water,
                       }),
-                    }
+                    },
                   );
 
                   if (response.ok) {
