@@ -36,8 +36,11 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <StatusBar style="light" />
       {!clientCode && (
-        <TouchableOpacity onPress={() => router.replace("/code")}>
-          <Text>← Enter Client Code</Text>
+        <TouchableOpacity
+          style={styles.codeBackButton}
+          onPress={() => router.replace("/code")}
+        >
+          <Text style={styles.codeBackText}>← Enter Client Code</Text>
         </TouchableOpacity>
       )}
 
@@ -256,5 +259,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     zIndex: 10,
+  },
+  codeBackButton: {
+    position: "absolute",
+    top: 60,
+    left: 24,
+    zIndex: 20,
+  },
+
+  codeBackText: {
+    color: "#777",
+    fontSize: 14,
+    fontFamily: "Poppins-Regular",
   },
 });
