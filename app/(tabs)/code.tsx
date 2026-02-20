@@ -60,10 +60,6 @@ export default function CodeScreen() {
       <TouchableOpacity style={styles.button} onPress={handleSave}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => router.replace("/")}>
-        <Text style={styles.skipText}>Proceed without client code</Text>
-      </TouchableOpacity>
     </View>
   );
 }
