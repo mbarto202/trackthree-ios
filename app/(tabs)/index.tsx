@@ -35,14 +35,6 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      {!clientCode && (
-        <TouchableOpacity
-          style={styles.codeBackButton}
-          onPress={() => router.replace("/code")}
-        >
-          <Text style={styles.codeBackText}>← Enter Client Code</Text>
-        </TouchableOpacity>
-      )}
 
       <TouchableOpacity
         style={styles.uploadButton}
