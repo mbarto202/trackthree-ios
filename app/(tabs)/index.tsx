@@ -39,14 +39,6 @@ const HomeScreen = () => {
       <TouchableOpacity
         style={styles.uploadButton}
         onPress={() => {
-          if (!clientCode) {
-            Alert.alert(
-              "Client Code Required",
-              "Upload is only available for registered clients.",
-            );
-            return;
-          }
-
           Alert.alert("Upload Entry", "Upload today's data to history?", [
             { text: "Cancel", style: "cancel" },
             {
