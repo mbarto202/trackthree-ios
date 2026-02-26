@@ -114,13 +114,6 @@ const HomeScreen = () => {
           <TouchableOpacity
             style={[styles.button, { marginLeft: 8 }]}
             onPress={() => {
-              if (!clientCode) {
-                Alert.alert(
-                  "Client Code Required",
-                  "History is only available for registered clients.",
-                );
-                return;
-              }
               router.push("/history");
             }}
           >
