@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "expo-router";
 import { useEffect, useLayoutEffect, useState } from "react";
 import {
@@ -28,9 +29,13 @@ export default function HistoryScreen() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
+        const clientCode = await AsyncStorage.getItem("clientCode");
+        if (!clientCode) return;
+
         const response = await fetch(
-          "http://localhost:8080/api/tracker/history"
+          `http://localhost:8080/api/tracker/history?clientCode=${clientCode}`,
         );
+
         const data = await response.json();
         setEntries(data);
       } catch (error) {
