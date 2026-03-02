@@ -23,7 +23,7 @@ const AddScreen = () => {
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(
     2,
-    "0"
+    "0",
   )}-${String(now.getDate()).padStart(2, "0")}`;
 
   const handleSubmit = () => {
@@ -48,8 +48,10 @@ const AddScreen = () => {
       setCalories("");
       setProtein("");
       setWater("");
-    }, [])
+    }, []),
   );
+
+  const digitsOnly = (text: string) => text.replace(/[^0-9]/g, "");
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
