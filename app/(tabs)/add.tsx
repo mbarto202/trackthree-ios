@@ -67,7 +67,7 @@ const AddScreen = () => {
             placeholderTextColor="#999"
             keyboardType="numeric"
             value={calories}
-            onChangeText={setCalories}
+            onChangeText={(t) => setCalories(digitsOnly(t))}
           />
 
           <Text style={styles.label}>Protein (g)</Text>
@@ -77,7 +77,7 @@ const AddScreen = () => {
             placeholderTextColor="#999"
             keyboardType="numeric"
             value={protein}
-            onChangeText={setProtein}
+            onChangeText={(t) => setProtein(digitsOnly(t))}
           />
 
           <Text style={styles.label}>Water (oz)</Text>
@@ -87,7 +87,7 @@ const AddScreen = () => {
             placeholderTextColor="#999"
             keyboardType="numeric"
             value={water}
-            onChangeText={setWater}
+            onChangeText={(t) => setWater(digitsOnly(t))}
           />
         </View>
 
