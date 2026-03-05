@@ -4,6 +4,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { router, useNavigation } from "expo-router";
 import React, { useCallback, useLayoutEffect, useState } from "react";
 import {
+  Alert,
   Keyboard,
   ScrollView,
   StyleSheet,
@@ -27,9 +28,24 @@ const AddScreen = () => {
   )}-${String(now.getDate()).padStart(2, "0")}`;
 
   const handleSubmit = () => {
-    addCalories(Number(calories));
-    addProtein(Number(protein));
-    addWater(Number(water));
+    const c = calories.trim();
+    const p = protein.trim();
+    const w = water.trim();
+
+    // must be integer strings
+    const intPattern = /^\d+$/;
+    if (!intPattern.test(c) || !intPattern.test(p) || !intPattern.test(w)) {
+      Alert.alert("Invalid input", "Please enter whole numbers only.");
+      return;
+    }
+
+    const caloriesInt = parseInt(c, 10);
+    const proteinInt = parseInt(p, 10);
+    const waterInt = parseInt(w, 10);
+
+    addCalories(caloriesInt);
+    addProtein(proteinInt);
+    addWater(waterInt);
     router.back();
   };
 
