@@ -81,9 +81,10 @@ const AddScreen = () => {
             style={styles.input}
             placeholder="e.g. 500"
             placeholderTextColor="#999"
-            keyboardType="numeric"
+            keyboardType="number-pad"
             value={calories}
             onChangeText={(t) => setCalories(digitsOnly(t))}
+            maxLength={5}
           />
 
           <Text style={styles.label}>Protein (g)</Text>
@@ -91,9 +92,10 @@ const AddScreen = () => {
             style={styles.input}
             placeholder="e.g. 30"
             placeholderTextColor="#999"
-            keyboardType="numeric"
+            keyboardType="number-pad"
             value={protein}
             onChangeText={(t) => setProtein(digitsOnly(t))}
+            maxLength={4}
           />
 
           <Text style={styles.label}>Water (oz)</Text>
@@ -101,9 +103,10 @@ const AddScreen = () => {
             style={styles.input}
             placeholder="e.g. 16"
             placeholderTextColor="#999"
-            keyboardType="numeric"
+            keyboardType="number-pad"
             value={water}
             onChangeText={(t) => setWater(digitsOnly(t))}
+            maxLength={4}
           />
         </View>
 
