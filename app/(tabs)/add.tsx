@@ -32,16 +32,18 @@ const AddScreen = () => {
     const p = protein.trim();
     const w = water.trim();
 
-    // must be integer strings
-    const intPattern = /^\d+$/;
-    if (!intPattern.test(c) || !intPattern.test(p) || !intPattern.test(w)) {
-      Alert.alert("Invalid input", "Please enter whole numbers only.");
+    // require at least one field
+    if (!c && !p && !w) {
+      Alert.alert(
+        "Missing fields",
+        "Please enter at least one value before submitting.",
+      );
       return;
     }
 
-    const caloriesInt = parseInt(c, 10);
-    const proteinInt = parseInt(p, 10);
-    const waterInt = parseInt(w, 10);
+    const caloriesInt = c ? parseInt(c, 10) : 0;
+    const proteinInt = p ? parseInt(p, 10) : 0;
+    const waterInt = w ? parseInt(w, 10) : 0;
 
     addCalories(caloriesInt);
     addProtein(proteinInt);
