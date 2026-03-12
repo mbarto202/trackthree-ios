@@ -36,6 +36,12 @@ export default function HistoryScreen() {
           `http://localhost:8080/api/tracker/history?clientCode=${clientCode}`,
         );
 
+        if (!response.ok) {
+          const message = await response.text();
+          console.error("History fetch failed:", response.status, message);
+          return;
+        }
+
         const data = await response.json();
         setEntries(data);
       } catch (error) {
