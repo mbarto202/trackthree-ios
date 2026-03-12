@@ -45,20 +45,28 @@ const HomeScreen = () => {
               text: "Upload",
               onPress: async () => {
                 try {
+                  const storedCode = await AsyncStorage.getItem("clientCode");
+
+                  if (!storedCode) {
+                    Alert.alert("Error", "No client code found.");
+                    return;
+                  }
+
                   const now = new Date();
                   const today = `${now.getFullYear()}-${String(
                     now.getMonth() + 1,
-                  ).padStart(2, "0")}-${String(now.getDate()).padStart(
+                  ).padStart(
                     2,
                     "0",
-                  )}`;
+                  )}-${String(now.getDate()).padStart(2, "0")}`;
+
                   const response = await fetch(
                     "http://localhost:8080/api/tracker/log",
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
-                        clientCode,
+                        clientCode: storedCode,
                         date: today,
                         calories,
                         protein,
@@ -67,13 +75,32 @@ const HomeScreen = () => {
                     },
                   );
 
+                  const message = await response.text();
+
+                  console.log("UPLOAD STATUS:", response.status);
+                  console.log("UPLOAD MESSAGE:", message);
+                  console.log("UPLOAD BODY:", {
+                    clientCode: storedCode,
+                    date: today,
+                    calories,
+                    protein,
+                    water,
+                  });
+
                   if (response.ok) {
-                    Alert.alert("Success", "Entry uploaded!");
+                    Alert.alert("Success", message || "Entry uploaded!");
                   } else {
-                    Alert.alert("Error", "Failed to upload entry.");
+                    Alert.alert(
+                      "Upload Failed",
+                      message || "Failed to upload entry.",
+                    );
                   }
-                } catch {
-                  Alert.alert("Error", "Failed to connect to backend.");
+                } catch (error) {
+                  console.error("UPLOAD ERROR:", error);
+                  Alert.alert(
+                    "Connection Error",
+                    "Failed to connect to backend.",
+                  );
                 }
               },
             },
