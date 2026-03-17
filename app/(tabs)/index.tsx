@@ -39,6 +39,10 @@ const HomeScreen = () => {
       <TouchableOpacity
         style={styles.uploadButton}
         onPress={() => {
+          if (calories === 0 && protein === 0 && water === 0) {
+            Alert.alert("Nothing to upload", "Add at least one value.");
+            return;
+          }
           Alert.alert("Upload Entry", "Upload today's data to history?", [
             { text: "Cancel", style: "cancel" },
             {
