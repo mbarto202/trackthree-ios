@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "expo-router";
 import { useEffect, useLayoutEffect, useState } from "react";
 import {
+  Alert,
   FlatList,
   StyleSheet,
   Text,
@@ -21,6 +22,7 @@ type Entry = {
 export default function HistoryScreen() {
   const navigation = useNavigation();
   const [entries, setEntries] = useState<Entry[]>([]);
+  const [clientCode, setClientCode] = useState<string | null>(null);
 
   useLayoutEffect(() => {
     navigation.setOptions({ tabBarStyle: { display: "none" } });
@@ -29,11 +31,13 @@ export default function HistoryScreen() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const clientCode = await AsyncStorage.getItem("clientCode");
-        if (!clientCode) return;
+        const storedCode = await AsyncStorage.getItem("clientCode");
+        if (!storedCode) return;
+
+        setClientCode(storedCode);
 
         const response = await fetch(
-          `http://localhost:8080/api/tracker/history?clientCode=${clientCode}`,
+          `http://localhost:8080/api/tracker/history?clientCode=${storedCode}`,
         );
 
         if (!response.ok) {
@@ -51,6 +55,31 @@ export default function HistoryScreen() {
 
     fetchHistory();
   }, []);
+
+  const handleResetHistory = async () => {
+    if (!clientCode) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/tracker/history?clientCode=${clientCode}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      const message = await response.text();
+
+      if (response.ok) {
+        setEntries([]);
+        Alert.alert("Success", message || "History cleared.");
+      } else {
+        Alert.alert("Error", message || "Failed to clear history.");
+      }
+    } catch (error) {
+      console.error("Error resetting history", error);
+      Alert.alert("Error", "Failed to connect to backend.");
+    }
+  };
 
   return (
     <View style={styles.container}>
