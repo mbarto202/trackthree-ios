@@ -193,4 +193,18 @@ const styles = StyleSheet.create({
   headerSpacer: {
     width: 90,
   },
+  resetHistoryButton: {
+    backgroundColor: "#441111",
+    borderWidth: 1,
+    borderColor: "#FF3C3C",
+    paddingVertical: 12,
+    borderRadius: 12,
+    marginBottom: 16,
+  },
+  resetHistoryText: {
+    color: "#FF3C3C",
+    textAlign: "center",
+    fontSize: 14,
+    fontFamily: "Poppins-SemiBold",
+  },
 });
