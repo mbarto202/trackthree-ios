@@ -99,6 +99,28 @@ export default function HistoryScreen() {
         <View style={styles.headerSpacer} />
       </View>
 
+      {clientCode === "TT-BUZZ99" && (
+        <TouchableOpacity
+          style={styles.resetHistoryButton}
+          onPress={() =>
+            Alert.alert(
+              "Clear All History",
+              "This will permanently delete all client history.",
+              [
+                { text: "Cancel", style: "cancel" },
+                {
+                  text: "Delete",
+                  style: "destructive",
+                  onPress: handleResetHistory,
+                },
+              ],
+            )
+          }
+        >
+          <Text style={styles.resetHistoryText}>Clear All History</Text>
+        </TouchableOpacity>
+      )}
+
       <FlatList
         data={entries}
         keyExtractor={(item) => item.id.toString()}
