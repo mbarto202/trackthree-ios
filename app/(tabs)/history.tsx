@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import {
   Alert,
   FlatList,
@@ -28,33 +29,35 @@ export default function HistoryScreen() {
     navigation.setOptions({ tabBarStyle: { display: "none" } });
   }, [navigation]);
 
-  useEffect(() => {
-    const fetchHistory = async () => {
-      try {
-        const storedCode = await AsyncStorage.getItem("clientCode");
-        if (!storedCode) return;
+  useFocusEffect(
+    useCallback(() => {
+      const fetchHistory = async () => {
+        try {
+          const storedCode = await AsyncStorage.getItem("clientCode");
+          if (!storedCode) return;
 
-        setClientCode(storedCode);
+          setClientCode(storedCode);
 
-        const response = await fetch(
-          `http://localhost:8080/api/tracker/history?clientCode=${storedCode}`,
-        );
+          const response = await fetch(
+            `http://localhost:8080/api/tracker/history?clientCode=${storedCode}`,
+          );
 
-        if (!response.ok) {
-          const message = await response.text();
-          console.error("History fetch failed:", response.status, message);
-          return;
+          if (!response.ok) {
+            const message = await response.text();
+            console.error("History fetch failed:", response.status, message);
+            return;
+          }
+
+          const data = await response.json();
+          setEntries(data);
+        } catch (error) {
+          console.error("Error fetching history", error);
         }
+      };
 
-        const data = await response.json();
-        setEntries(data);
-      } catch (error) {
-        console.error("Error fetching history", error);
-      }
-    };
-
-    fetchHistory();
-  }, []);
+      fetchHistory();
+    }, []),
+  );
 
   const handleResetHistory = async () => {
     if (!clientCode) return;
