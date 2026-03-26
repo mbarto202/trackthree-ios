@@ -117,7 +117,7 @@ export default function HistoryScreen() {
             )
           }
         >
-          <Text style={styles.resetHistoryText}>Clear All History</Text>
+          <Text style={styles.resetHistoryText}>Clear History</Text>
         </TouchableOpacity>
       )}
 
