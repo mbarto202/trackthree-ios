@@ -14,6 +14,7 @@ import {
 
 type Entry = {
   id: number;
+  clientCode: string;
   date: string;
   calories: number;
   protein: number;
@@ -129,6 +130,7 @@ export default function HistoryScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.card}>
+            <Text style={styles.clientCode}>{item.clientCode}</Text>
             <Text style={styles.date}>
               {new Date(item.date + "T00:00:00").toLocaleDateString("en-US", {
                 month: "long",
@@ -208,6 +210,12 @@ const styles = StyleSheet.create({
     color: "#FF3C3C",
     textAlign: "center",
     fontSize: 14,
+    fontFamily: "Poppins-SemiBold",
+  },
+  clientCode: {
+    color: "#FF3C3C",
+    fontSize: 14,
+    marginBottom: 4,
     fontFamily: "Poppins-SemiBold",
   },
 });
