@@ -85,6 +85,31 @@ export default function HistoryScreen() {
     }
   };
 
+  const handleDeleteEntry = async (id: number) => {
+    if (!clientCode) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/tracker/entry/${id}?clientCode=${clientCode}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      const message = await response.text();
+
+      if (response.ok) {
+        setEntries((prev) => prev.filter((entry) => entry.id !== id));
+        Alert.alert("Success", message || "Entry deleted.");
+      } else {
+        Alert.alert("Error", message || "Failed to delete entry.");
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      Alert.alert("Error", "Failed to connect to backend.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerRow}>
