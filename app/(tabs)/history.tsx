@@ -155,7 +155,30 @@ export default function HistoryScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.card}>
+            {clientCode === "TT-BUZZ99" && (
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() =>
+                  Alert.alert(
+                    "Delete Entry",
+                    "Are you sure you want to delete this entry?",
+                    [
+                      { text: "Cancel", style: "cancel" },
+                      {
+                        text: "Delete",
+                        style: "destructive",
+                        onPress: () => handleDeleteEntry(item.id),
+                      },
+                    ],
+                  )
+                }
+              >
+                <Ionicons name="remove" size={16} color="#fff" />
+              </TouchableOpacity>
+            )}
+
             <Text style={styles.clientCode}>{item.clientCode}</Text>
+
             <Text style={styles.date}>
               {new Date(item.date + "T00:00:00").toLocaleDateString("en-US", {
                 month: "long",
@@ -163,6 +186,7 @@ export default function HistoryScreen() {
                 year: "numeric",
               })}
             </Text>
+
             <Text style={styles.text}>Calories: {item.calories}</Text>
             <Text style={styles.text}>Protein: {item.protein}</Text>
             <Text style={styles.text}>Water: {item.water} oz</Text>
@@ -242,5 +266,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 4,
     fontFamily: "Poppins-SemiBold",
+  },
+  deleteButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: "#FF3C3C",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 10,
   },
 });
