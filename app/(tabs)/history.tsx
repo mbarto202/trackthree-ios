@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     position: "absolute",
-    top: 10,
+    top: "50%",
     right: 10,
     width: 24,
     height: 24,
