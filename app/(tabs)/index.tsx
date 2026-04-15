@@ -32,6 +32,11 @@ const HomeScreen = () => {
     })();
   }, []);
 
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("clientCode");
+    router.replace("/code");
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
