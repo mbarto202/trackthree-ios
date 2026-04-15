@@ -39,6 +39,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Ionicons name="log-out-outline" size={22} color="#fff" />
+      </TouchableOpacity>
       <StatusBar style="light" />
 
       <TouchableOpacity
@@ -284,5 +287,11 @@ const styles = StyleSheet.create({
     color: "#777",
     fontSize: 14,
     fontFamily: "Poppins-Regular",
+  },
+  logoutButton: {
+    position: "absolute",
+    top: 60,
+    right: 24,
+    zIndex: 20,
   },
 });
