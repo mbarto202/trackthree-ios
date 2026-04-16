@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 import { router, useNavigation } from "expo-router";
-import { useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import {
   Alert,
   StyleSheet,
@@ -17,6 +18,12 @@ export default function CodeScreen() {
   useLayoutEffect(() => {
     navigation.setOptions({ tabBarStyle: { display: "none" } });
   }, [navigation]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setCode(""); // reset input every time screen is focused
+    }, []),
+  );
 
   const handleSave = async () => {
     const formatted = code.trim().toUpperCase();
