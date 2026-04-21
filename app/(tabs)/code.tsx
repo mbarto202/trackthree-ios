@@ -105,11 +105,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins-SemiBold",
   },
-  skipText: {
-    color: "#FF3C3C",
-    textAlign: "center",
-    marginTop: 20,
-    fontSize: 14,
-    fontFamily: "Poppins-Regular",
-  },
 });
