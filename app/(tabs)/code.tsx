@@ -45,7 +45,7 @@ export default function CodeScreen() {
       // Only save AFTER validation
       await AsyncStorage.setItem("clientCode", formatted);
       router.replace("/"); // go to Home
-    } catch (err) {
+    } catch {
       Alert.alert("Error", "Could not validate code. Try again.");
     }
   };
@@ -62,6 +62,7 @@ export default function CodeScreen() {
         onChangeText={setCode}
         autoCorrect={false}
         autoCapitalize="characters"
+        maxLength={9}
       />
 
       <TouchableOpacity style={styles.button} onPress={handleSave}>
