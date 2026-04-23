@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTracker } from "../../context/TrackerContext";
 
@@ -19,15 +19,11 @@ const HomeScreen = () => {
     });
   }, [navigation]);
 
-  const [clientCode, setClientCode] = useState<string | null>(null);
-
   useEffect(() => {
     (async () => {
       const stored = await AsyncStorage.getItem("clientCode");
       if (!stored) {
         router.replace("/code");
-      } else {
-        setClientCode(stored);
       }
     })();
   }, []);
