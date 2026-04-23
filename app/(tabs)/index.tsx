@@ -276,18 +276,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     zIndex: 10,
   },
-  codeBackButton: {
-    position: "absolute",
-    top: 60,
-    left: 24,
-    zIndex: 20,
-  },
-
-  codeBackText: {
-    color: "#777",
-    fontSize: 14,
-    fontFamily: "Poppins-Regular",
-  },
   logoutButton: {
     position: "absolute",
     top: 60,
