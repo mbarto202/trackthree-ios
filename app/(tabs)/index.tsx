@@ -148,9 +148,7 @@ const HomeScreen = () => {
 
           <TouchableOpacity
             style={[styles.button, { marginLeft: 8 }]}
-            onPress={() => {
-              router.push("/history");
-            }}
+            onPress={() => router.push("/history")}
           >
             <Text style={styles.buttonText}>History</Text>
           </TouchableOpacity>
