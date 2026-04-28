@@ -35,7 +35,15 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+      <TouchableOpacity
+        style={styles.logoutButton}
+        onPress={() =>
+          Alert.alert("Logout", "Are you sure you want to log out?", [
+            { text: "Cancel", style: "cancel" },
+            { text: "Logout", onPress: handleLogout },
+          ])
+        }
+      >
         <Ionicons name="log-out-outline" size={22} color="#fff" />
       </TouchableOpacity>
       <StatusBar style="light" />
