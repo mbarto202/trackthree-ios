@@ -21,11 +21,6 @@ const AddScreen = () => {
   const [water, setWater] = useState("");
   const { addCalories, addProtein, addWater } = useTracker();
   const navigation = useNavigation();
-  const now = new Date();
-  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(
-    2,
-    "0",
-  )}-${String(now.getDate()).padStart(2, "0")}`;
 
   const handleSubmit = () => {
     const c = calories.trim();
