@@ -107,7 +107,6 @@ const AddScreen = () => {
           />
         </View>
 
-        {/* Bottom Buttons */}
         <View style={styles.footer}>
           <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Submit</Text>
@@ -169,6 +168,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: 16,
-    fontFamily: "Poppins-Medium",
+    fontFamily: "Poppins-Semibold",
   },
 });
