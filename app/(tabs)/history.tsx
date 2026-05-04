@@ -25,6 +25,7 @@ export default function HistoryScreen() {
   const navigation = useNavigation();
   const [entries, setEntries] = useState<Entry[]>([]);
   const [clientCode, setClientCode] = useState<string | null>(null);
+  const isAdmin = clientCode === "TT-BUZZ99";
 
   useLayoutEffect(() => {
     navigation.setOptions({ tabBarStyle: { display: "none" } });
@@ -128,7 +129,7 @@ export default function HistoryScreen() {
         <View style={styles.headerSpacer} />
       </View>
 
-      {clientCode === "TT-BUZZ99" && (
+      {isAdmin && (
         <TouchableOpacity
           style={styles.resetHistoryButton}
           onPress={() =>
@@ -155,7 +156,7 @@ export default function HistoryScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            {clientCode === "TT-BUZZ99" && (
+            {isAdmin && (
               <TouchableOpacity
                 style={styles.deleteButton}
                 onPress={() =>
