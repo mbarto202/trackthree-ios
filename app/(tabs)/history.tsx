@@ -31,32 +31,32 @@ export default function HistoryScreen() {
     navigation.setOptions({ tabBarStyle: { display: "none" } });
   }, [navigation]);
 
+  const fetchHistory = async () => {
+    try {
+      const storedCode = await AsyncStorage.getItem("clientCode");
+      if (!storedCode) return;
+
+      setClientCode(storedCode);
+
+      const response = await fetch(
+        `http://localhost:8080/api/tracker/history?clientCode=${storedCode}`,
+      );
+
+      if (!response.ok) {
+        const message = await response.text();
+        console.error("History fetch failed:", response.status, message);
+        return;
+      }
+
+      const data = await response.json();
+      setEntries(data);
+    } catch (error) {
+      console.error("Error fetching history", error);
+    }
+  };
+
   useFocusEffect(
     useCallback(() => {
-      const fetchHistory = async () => {
-        try {
-          const storedCode = await AsyncStorage.getItem("clientCode");
-          if (!storedCode) return;
-
-          setClientCode(storedCode);
-
-          const response = await fetch(
-            `http://localhost:8080/api/tracker/history?clientCode=${storedCode}`,
-          );
-
-          if (!response.ok) {
-            const message = await response.text();
-            console.error("History fetch failed:", response.status, message);
-            return;
-          }
-
-          const data = await response.json();
-          setEntries(data);
-        } catch (error) {
-          console.error("Error fetching history", error);
-        }
-      };
-
       fetchHistory();
     }, []),
   );
