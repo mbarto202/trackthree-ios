@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     marginLeft: 4,
-    fontFamily: "Poppins-Medium",
+    fontFamily: "Poppins-SemiBold",
   },
   headerSpacer: {
     width: 90,
