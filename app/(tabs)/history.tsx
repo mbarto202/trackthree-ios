@@ -100,7 +100,7 @@ export default function HistoryScreen() {
       const message = await response.text();
 
       if (response.ok) {
-        setEntries((prev) => prev.filter((entry) => entry.id !== id));
+        await fetchHistory();
         Alert.alert("Success", message || "Entry deleted.");
       } else {
         Alert.alert("Error", message || "Failed to delete entry.");
