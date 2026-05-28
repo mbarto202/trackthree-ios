@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/constants/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import { router, useNavigation } from "expo-router";
@@ -31,7 +32,7 @@ export default function CodeScreen() {
 
     try {
       const res = await fetch(
-        `http://localhost:8080/api/tracker/validate?clientCode=${formatted}`,
+        `${API_BASE_URL}/api/tracker/validate?clientCode=${formatted}`,
       );
 
       if (!res.ok) {
