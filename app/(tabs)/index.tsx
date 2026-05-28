@@ -1,4 +1,5 @@
 // app/(tabs)/index.tsx
+import { API_BASE_URL } from "@/constants/api";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
@@ -77,7 +78,7 @@ const HomeScreen = () => {
                   )}-${String(now.getDate()).padStart(2, "0")}`;
 
                   const response = await fetch(
-                    "http://localhost:8080/api/tracker/log",
+                    `${API_BASE_URL}/api/tracker/log`,
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
