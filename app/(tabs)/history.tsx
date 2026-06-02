@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/constants/api";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
@@ -39,7 +40,7 @@ export default function HistoryScreen() {
       setClientCode(storedCode);
 
       const response = await fetch(
-        `http://localhost:8080/api/tracker/history?clientCode=${storedCode}`,
+        `${API_BASE_URL}/api/tracker/history?clientCode=${storedCode}`,
       );
 
       if (!response.ok) {
@@ -66,7 +67,7 @@ export default function HistoryScreen() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/tracker/history?clientCode=${clientCode}`,
+        `${API_BASE_URL}/api/tracker/history?clientCode=${clientCode}`,
         {
           method: "DELETE",
         },
@@ -91,7 +92,7 @@ export default function HistoryScreen() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/tracker/entry/${id}?clientCode=${clientCode}`,
+        `${API_BASE_URL}/api/tracker/entry/${id}?clientCode=${clientCode}`,
         {
           method: "DELETE",
         },
